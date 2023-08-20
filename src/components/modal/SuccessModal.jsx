@@ -14,7 +14,7 @@ export default function Modal() {
                             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[9999] outline-none focus:outline-none backdrop-blur-sm backdrop-brightness-75"
                             onClick={() => setShowSuccessModal(false)}
                         >
-                            <div className="relative w-auto my-6 mx-auto md:w-[50%] w-[90%]">
+                            <div className="relative w-auto my-6 mx-auto md:w-[50%] w-[90vw]">
                                 {/*content*/}
                                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                                     {/*header*/}
