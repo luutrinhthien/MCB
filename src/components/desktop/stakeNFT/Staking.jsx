@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import StakingCard from './StakingCard';
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
+import { useAccount } from 'wagmi'
+import { Web3Button } from '@web3modal/react';
+import ListNFT from './ListNFT';
+import LoadingModal from "../../modal/LoadingModal"
+import SuccessModal from "../../modal/SuccessModal"
+import ErrorModal from "../../modal/ErrorModal"
 
 export default function Staking() {
-  const { address, isConnected } = useAccount()
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  })
-  const { disconnect } = useDisconnect()
+  const { address } = useAccount()
 
   const [input, setInput] = useState("")
 
@@ -20,6 +20,11 @@ export default function Staking() {
 
   return (
     <div>
+      {<LoadingModal />}
+      {<SuccessModal />}
+      {<ErrorModal />}
+      <ListNFT />
+
       <div className='mt-4 ml-14 flex justify-between mr-14 text-2xl'>
         <div style={{ width: "3rem" }}>
           <img src="/img/logo.png" alt="" />
@@ -29,19 +34,8 @@ export default function Staking() {
           <div className={`cursor-pointer `} >OpenSea</div>
           <div className={`cursor-pointer font-bold`} >Staking</div>
         </div>
-        <div>
-          {isConnected ?
-            <div>
-              <button className='text-black px-3 py-1' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
-                onClick={() => disconnect()}>
-                {address.slice(0, 5)} ... {address.slice(address.length - 5, address.length)}
-              </button>
-            </div>
-            :
-            <button className='text-black px-3 py-1' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
-              onClick={() => connect()}>Connect Wallet</button>
-          }
-        </div>
+
+        <Web3Button avatar='hide' balance="show" />
 
       </div>
       <div className='mt-10 mx-auto' style={{ width: "70%" }}>
@@ -78,8 +72,8 @@ export default function Staking() {
               />
               <div className="toggle absolute w-11 ml-1 h-6 rounded-full cursor-pointer" style={{ backgroundColor: "#525252" }}></div>
               <div
-                style={{ marginTop: "1.5px", backgroundColor: "#ABF20D" }}
-                className={`cursor-pointer dot absolute w-5 h-5 rounded-full transition-transform ${isOn ? 'transform translate-x-6' : 'bg-gray-100 translate-x-2'
+                style={{ marginTop: "1.5px", backgroundColor: (isOn ? "#ABF20D" : "white") }}
+                className={`cursor-pointer dot absolute w-5 h-5 rounded-full transition-transform ${isOn ? 'transform translate-x-7' : 'bg-gray-100 translate-x-1'
                   }`}
               />
             </label>
@@ -99,13 +93,11 @@ export default function Staking() {
 
         <div className='my-4 mt-12'>
           <StakingCard />
-          <StakingCard />
-          <StakingCard />
         </div>
 
-        {/* <div className='text-center mt-8 mb-4 text-sm'>
+        <div className='text-center mt-8 mb-4 text-sm'>
           Copyright ©2023 MultiCurrency Block. All rights reserved
-        </div> */}
+        </div>
       </div>
     </div>
   )

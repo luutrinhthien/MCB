@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './Modal.module.css'
-import DefaultChild from './DefaultChild';
+import DefaultChild from './defaultChild';
 import LoadingChild from './LoadingChild';
 import ResultChild from './ResultChild';
 

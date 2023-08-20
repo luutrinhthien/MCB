@@ -1,0 +1,19 @@
+.dropdownContainer {
+    height: 8rem;
+    transition: height 0.5s ease;
+}
+
+.dropdownContent {
+    opacity: 0;
+    animation-name: fadeIn;
+    transform: translateY(-50px);
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

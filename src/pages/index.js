@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Inter } from 'next/font/google'
-import LandingPageMobile from '@/components/landingPageMobile/Landing'
-import LandingPage from '@/components/landingPage/Landing'
+import LandingPageMobile from '@/components/mobile/landingPageMobile/Landing'
+import LandingPage from '@/components/desktop/landingPage/Landing'
 import Nav from '@/components/navbar/Nav'
-import Staking from '@/components/staking/Staking'
+import Staking from '@/components/desktop/stakingLandingPage/Staking'
 import Modal from '@/components/landingModal/Modal'
 
 const inter = Inter({ subsets: ['latin'] })
