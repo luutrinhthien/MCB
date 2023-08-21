@@ -1,9 +1,7 @@
 import '@/styles/globals.css'
 import Head from 'next/head'
 import { WagmiConfig, createConfig, mainnet, configureChains } from 'wagmi'
-import { createPublicClient, http } from 'viem'
 import { bscTestnet } from '@wagmi/core/chains'
-// import { bscTestnet } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
 import { useWeb3ModalTheme, Web3Modal } from '@web3modal/react';
 import { useEffect } from 'react'
@@ -15,10 +13,6 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 
 const config = createConfig({
   autoConnect: true,
-  // publicClient: createPublicClient({
-  //   chain: bscTestnet,
-  //   transport: http()
-  // }),
   connectors: w3mConnectors({ projectId, chains }),
   publicClient,
 })
