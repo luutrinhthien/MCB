@@ -149,11 +149,10 @@ export default function BodyCard() {
             {isClient ? <div className={` p-6 justify-between ${styles.dropdownContent}`}>
                 <div className='w-[100%]'>
                     <div className='p-4' style={{ borderColor: "#ABF20D", borderRadius: "14px", border: "1px solid #ABF20D" }}>
-                        USDT per day: ~$1.7
-                        Withdrawal Fee: 1%
-                        Get FDC
-                        View Contract
-                        View Exchange
+                        <div>USDT per day: ~$1.7</div>
+                        <div>Withdrawal Fee: 1%</div>
+                        <div className='hover:opacity-70 cursor-pointer' onClick={() => { window.open("https://testnet.bscscan.com/address/0xa0F29fa4cb53C9Cc20F1A636DaBD1B4E8a8C91d7#writeContract") }}>Get FDC</div>
+                        <div className='hover:opacity-70 cursor-pointer' onClick={() => { window.open("https://testnet.bscscan.com/address/0x8f6EA3C986B17dAf3D78eF4231C34d903ccD4930#code") }}>View Contract</div>
                     </div>
                     <div className='mt-3 p-4 ' style={{ borderColor: "#ABF20D", borderRadius: "14px", border: "1px solid #ABF20D" }}>
                         <div className='flex'>
