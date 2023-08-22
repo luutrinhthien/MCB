@@ -18,7 +18,7 @@ export default function StakingCard() {
         setIsShow(!isShow)
 
         if (dropdownContainerRef.current && !isShow) {
-            dropdownContainerRef.current.style.height = '54rem'; // Set the height as needed
+            dropdownContainerRef.current.style.height = '60rem'; // Set the height as needed
         }
         if (dropdownContainerRef.current && isShow) {
             dropdownContainerRef.current.style.height = '8rem'; // Set the height as needed

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Menu.module.css'
 
 const Menu = ({ setShowMobileMenu }) => {
-    return <div className={`px-2 py-3 space-y-2 font-medium text-slate-700 absolute right-0 left-0 top-0 bottom-0 ${styles.slideIn}`} style={{ backgroundColor: "black", zIndex: "100" }}>
+    return <div className={`px-2 py-3 space-y-2 font-medium text-slate-700 absolute right-0 left-0 top-0 bottom-[-100vh] ${styles.slideIn}`} style={{ backgroundColor: "black", zIndex: "100" }}>
         <div className='flex justify-end'>
             <svg
                 onClick={() => setShowMobileMenu(prev => !prev)}

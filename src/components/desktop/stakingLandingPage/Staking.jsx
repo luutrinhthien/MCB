@@ -19,7 +19,7 @@ export default function Home() {
 
                         <div className=' grid grid-cols-3'>
                             <div className='col-span-2'>
-                                <div className='' style={{ borderRadius: "12px" }}>
+                                <div className='bg-[#1A1615]' style={{ borderTopLeftRadius: "12px", borderBottomLeftRadius: "12px" }}>
                                     <div className='flex' onMouseEnter={() => setHoveredDiv(1)} >
                                         <p hidden={hoveredDiv === 1} className='text-5xl font-bold mx-4 p-2'>01</p>
                                         <p hidden={hoveredDiv === 1} className='text-3xl mt-1.5 p-2'>Accquire your NFTs</p>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import StakingCard from './StakingCard';
 import { useAccount } from 'wagmi'
-import { Web3Button } from '@web3modal/react';
+import { Web3Button, useWeb3Modal } from '@web3modal/react';
 import ListNFT from './ListNFT';
 import Menu from './Menu';
 import LoadingModal from "../../modal/LoadingModal"
@@ -9,6 +9,8 @@ import SuccessModal from "../../modal/SuccessModal"
 import ErrorModal from "../../modal/ErrorModal"
 
 export default function Staking() {
+  const { open, close } = useWeb3Modal()
+
   const { address } = useAccount()
 
   const [input, setInput] = useState("")
@@ -33,7 +35,14 @@ export default function Staking() {
         </div>
         <div className='flex'>
           <div className='mr-2 '>
-            <Web3Button avatar='hide' />
+            {address ? <div className='mt-5'><Web3Button avatar='hide' balance="show" /></div>
+              :
+              <div className='mt-5 text-xl'>
+                <button className='px-4 py-1' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                  onClick={() => open()}>
+                  <p className='text-black'>Connect Wallet</p>
+                </button>
+              </div>}
           </div>
 
           <svg

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import styles from './BodyCard.module.css'
-import { Web3Button } from '@web3modal/react';
+import { Web3Button, useWeb3Modal } from '@web3modal/react';
 import { useAccount } from 'wagmi'
 import DropDown from './DropDown';
 import { ListNftContext } from '@/pages/staking';
@@ -10,6 +10,8 @@ import NFTabi from "../../../constant/NFT.json"
 import StakingNFTabi from "../../../constant/StakingNFT.json"
 
 export default function BodyCard() {
+    const { open, close } = useWeb3Modal()
+
     const [isClient, setIsClient] = useState(false)
     useEffect(() => {
         setIsClient(true)
@@ -163,7 +165,7 @@ export default function BodyCard() {
                         </div>
                         <div className='flex mt-[0px] ml-3'>
                             <div>~{(Number(dataHarvest) / (10 ** 18)) || 0} USD</div>
-                            <button className='ml-[2rem] text-xl px-3 text-black' disabled={!Number(dataHarvest)} style={{ borderRadius: "12px", backgroundColor: (Number(dataHarvest) ? "#ABF20D" : "rgb(115 115 115)") }}
+                            <button className='ml-[2rem] text-xl px-3 text-white' disabled={!Number(dataHarvest)} style={{ borderRadius: "12px", backgroundColor: (Number(dataHarvest) ? "#ABF20D" : "rgb(115 115 115)") }}
                                 onClick={harvest}>
                                 Harvest
                             </button>
@@ -185,9 +187,15 @@ export default function BodyCard() {
                         {isConnected ? <div className='mt-5 text-xl'>
                             <button className='px-6 py-2 w-full' disabled={!selectedOptionFDCBalance} style={{ backgroundColor: (selectedOptionFDCBalance ? "#ABF20D" : "rgb(115 115 115)"), borderRadius: "12px" }}
                                 onClick={() => approveNFT({ args: [StakingNFTaddress, selectedOptionFDCBalance] })}>
-                                <p className='text-black'>Stake</p>
+                                <p className='text-white'>Stake</p>
                             </button>
-                        </div> : <Web3Button />}
+                        </div> :
+                            <div className='mt-3 text-xl'>
+                                <button className='px-6 py-2' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                                    onClick={() => open()}>
+                                    <p className='text-white'>Connect Wallet</p>
+                                </button>
+                            </div>}
 
                     </div>
                 </div>
@@ -205,9 +213,15 @@ export default function BodyCard() {
                         {isConnected ? <div className='mt-5 text-xl'>
                             <button className='px-6 py-2 w-full' disabled={!selectedOptionFDCStaked && selectedOptionFDCStaked != 0} style={{ backgroundColor: (selectedOptionFDCStaked || selectedOptionFDCStaked == 0 ? "#ABF20D" : "rgb(115 115 115)"), borderRadius: "12px" }}
                                 onClick={unStake}>
-                                <p className='text-black'>Unstake</p>
+                                <p className='text-white'>Unstake</p>
                             </button>
-                        </div> : <Web3Button />}
+                        </div> :
+                            <div className='mt-3 text-xl'>
+                                <button className='px-6 py-2' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                                    onClick={() => open()}>
+                                    <p className='text-white'>Connect Wallet</p>
+                                </button>
+                            </div>}
 
                     </div>
                 </div>
