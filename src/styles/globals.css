@@ -23,4 +23,6 @@ body {
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
   font-family: 'Darker Grotesque', sans-serif;
   font-size: large;
+  background-color: black;
+  color: white;
 }
