@@ -134,7 +134,8 @@ export default function BodyCard() {
 
     useEffect(() => {
         if (isDoneHarvest === true) {
-            showSuccessModal(true)
+            setShowLoadingModal(false)
+            setShowSuccessModal(true)
         }
     }, [isDoneHarvest]);
     // handle harvest
