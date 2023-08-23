@@ -7,6 +7,11 @@ import { useNetwork, useSwitchNetwork, useAccount } from 'wagmi'
 export const ListNftContext = createContext();
 
 export default function Home() {
+  const [isClient, setIsClient] = useState(false)
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const [listNFT, setListNFT] = useState([]);
   const [listNFTStaked, setListNFTStaked] = useState([]);
   const [fetchAgainList, setFetchAgainList] = useState(false);
@@ -33,12 +38,13 @@ export default function Home() {
       setFetchAgainList, showSuccessModal, setShowSuccessModal, showLoadingModal, setShowLoadingModal,
       showErrorModal, setShowErrorModal
     }}>
-      <div className='md:hidden visible'>
-        <StakingMobile />
-      </div>
-      <div className='md:block hidden'>
+      {isClient ?
+        <div className='md:hidden visible'>
+          <StakingMobile />
+        </div> : <div></div>}
+      {isClient ? <div className='md:block hidden'>
         <Staking />
-      </div>
+      </div> : <div></div>}
     </ListNftContext.Provider>
   )
 }
