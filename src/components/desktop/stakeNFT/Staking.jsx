@@ -37,13 +37,14 @@ export default function Staking() {
           <div style={{ width: "3rem" }}>
             <img src="/img/logo.png" alt="" />
           </div>
-          <div className='flex space-x-5'>
+          <div className='flex space-x-4'>
             <a className={`cursor-pointer `} href='/' >Home</a>
             <div className={`cursor-pointer `} >OpenSea</div>
             <div className={`cursor-pointer font-bold`} >Staking</div>
+            <a className={`cursor-pointer `} href='/IDO'>IDO</a>
           </div>
 
-          {address ? <div className='mt-5'><Web3Button avatar='hide' balance="show" /></div>
+          {address ? <div className='mt-0 mb-5'><Web3Button avatar='hide' /></div>
             :
             <div className='mt-5 text-xl'>
               <button className='px-4 py-1' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
