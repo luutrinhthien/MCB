@@ -2,12 +2,127 @@ import React from 'react'
 import SocialMedia from './Utils/SocialMedia'
 import Active from './Utils/Active'
 import { Web3Button, useWeb3Modal } from '@web3modal/react';
-import { useAccount } from 'wagmi'
+import { MCB, USDT, ICO } from "../../constant/address"
+import ERC20 from "../../constant/ERC20.json"
+import ICO_ABI from "../../constant/ICO.json"
+import {
+    useContractRead, useAccount,
+    useContractWrite, useWaitForTransaction
+} from 'wagmi'
 
 function Special() {
     const { address } = useAccount()
     const { open, close } = useWeb3Modal()
 
+    const { data: balanceOfMCB } = useContractRead({
+        address: MCB,
+        abi: ERC20,
+        functionName: 'balanceOf',
+        args: [address],
+        watch: true,
+    })
+
+    const { data: balanceOfThis } = useContractRead({
+        address: MCB,
+        abi: ERC20,
+        functionName: 'balanceOf',
+        args: [ICO],
+        watch: true,
+    })
+
+    const { data: balanceOfUSDT } = useContractRead({
+        address: USDT,
+        abi: ERC20,
+        functionName: 'balanceOf',
+        args: [address],
+        watch: true,
+    })
+
+    const { data: AllowanceOfUSDT } = useContractRead({
+        address: USDT,
+        abi: ERC20,
+        functionName: 'allowance',
+        args: [address, ICO],
+        watch: true,
+    })
+
+    const { data: rate } = useContractRead({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'rate',
+        watch: true,
+    })
+
+    const { data: isAllowToTrade } = useContractRead({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'isAllowToTrade',
+        watch: true,
+    })
+
+    const { data: slotUsed } = useContractRead({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'slotUsed',
+        args: [address],
+        watch: true,
+    })
+
+    const { data: whitelist } = useContractRead({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'whitelist',
+        args: [address],
+        watch: true,
+    })
+
+    const { data: totalSlot } = useContractRead({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'totalSlot',
+        watch: true,
+    })
+
+    const { data: tokenPerSlot } = useContractRead({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'tokenPerSlot',
+        watch: true,
+    })
+
+    const { data: getPricePerSlot } = useContractRead({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'getPricePerSlot',
+        watch: true,
+    })
+
+    const { data: totalSold } = useContractRead({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'totalSold',
+        watch: true,
+    })
+
+    const { data: approve, isLoading: loadingApproval, write: approveUSDT } = useContractWrite({
+        address: USDT,
+        abi: ERC20,
+        functionName: 'approve',
+        args: [ICO, Number(getPricePerSlot)],
+    })
+
+    const { isSuccess, isLoading: isWaitForApproval } = useWaitForTransaction({
+        hash: approve?.hash,
+    });
+
+    const { data: buy, isLoading: loadingBuy, write: buyUSDT } = useContractWrite({
+        address: ICO,
+        abi: ICO_ABI,
+        functionName: 'buyToken',
+        args: [Number(getPricePerSlot)],
+    })
+
+    // console.log("success approve: ",  Number(AllowanceOfUSDT)/10**18, Number(getPricePerSlot))
     return (
         <div
             style={{ border: "1px solid rgb(171, 242, 13)", borderRadius: "12px" }}
@@ -44,19 +159,19 @@ function Special() {
             <div class="flex space-x-4">
                 <div class="flex-1">
                     <div className='text-[20px]'>Swap rate (estimate)</div>
-                    <div className='font-bold text-[24px] text-lime-400'><span className='font-black'>0.0025</span> USDT per MCB</div>
+                    <div className='font-bold text-[24px] text-lime-400'><span className='font-black'>{1 / Number(rate)}</span> USDT per MCB</div>
                 </div>
                 <div class="flex-1 pl box-border">
                     <div className='text-[20px] text-right pr-8'>Sold</div>
                     <div className='flex font-bold text-[24px] text-lime-400 justify-end'>
-                        <div className='font-black'>0.000</div>
+                        <div className='font-black'>{Number(totalSold)}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
                 </div>
                 <div class="flex-1">
                     <div className='text-[20px] text-right'>Remaining</div>
                     <div className='flex font-bold text-[24px] text-lime-400 justify-end'>
-                        <div className='font-black'>100,000,000</div>
+                        <div className='font-black'>{(Number(balanceOfThis) / 10 ** 18).toString()}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
                 </div>
@@ -72,19 +187,19 @@ function Special() {
             <div className='flex'>
                 <div className='w-[25%]'>
                     <div>Total slot</div>
-                    <div className='font-bold text-[24px] text-lime-400'>250</div>
+                    <div className='font-bold text-[24px] text-lime-400'>{Number(totalSlot)}</div>
                 </div>
                 <div className='w-[25%]'>
                     <div className='text-[20px] text-center'>Token per Slot</div>
                     <div className='flex font-bold text-[24px] text-lime-400 justify-start'>
-                        <div className='font-black'>1,000,000</div>
+                        <div className='font-black'>{Number(tokenPerSlot)/10**18}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
                 </div>
                 <div className='w-[25%]'>
                     <div className='text-[20px] text-center'>Price per Slot</div>
                     <div className='flex font-bold text-[24px] text-lime-400 justify-center'>
-                        <div className='font-black'>$2,500</div>
+                        <div className='font-black'>${Number(getPricePerSlot)/10**18}</div>
                         <div className='mt-4'>USDT</div>
                     </div>
                 </div>
@@ -100,12 +215,41 @@ function Special() {
                     <div className='font-bold flex'>
                         <div>Balance: </div>
                         <div className='text-[16px] mt-1 ml-1'>
-                            <div> ???USDT</div>
-                            <div> ???MCB</div>
+                            <div> {Number(balanceOfUSDT) / (10 ** 18) || "???"} USDT</div>
+                            <div> {Number(balanceOfMCB) / (10 ** 18) || "???"} MCB</div>
                         </div>
                     </div>
-                    <div className='text-center text-lime-400 font-bold'>Sale now open.</div>
-                    {address ? <div className='mt-1 flex justify-center'><Web3Button avatar='hide' /></div>
+                    <div className='text-center text-lime-400 font-bold'>
+                        {isAllowToTrade ? 'Sale now open.' : 'Sale have not open'}
+                    </div>
+                    {address ?
+                        !slotUsed ?
+                            <div className='mt-1 text-center font-bold'>
+                                {whitelist ?
+                                    (isAllowToTrade ?
+                                        Number(AllowanceOfUSDT) !== Number(getPricePerSlot) ?
+                                            <button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                                                onClick={approveUSDT}>
+                                                <p className='text-black'>Approve</p>
+                                            </button> :
+                                            (<button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                                                onClick={buyUSDT}>
+                                                <p className='text-black'>Buy</p>
+                                            </button>)
+                                        :
+                                        <div className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#cccccc", borderRadius: "12px", cursor: "not-allowed" }}>
+                                            <p className='text-black'>Wait to open trading</p>
+                                        </div>)
+                                    :
+                                    (<div className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#cccccc", borderRadius: "12px", cursor: "not-allowed" }}>
+                                        <p className='text-black'>You are not in white list</p>
+                                    </div>)
+                                }
+                            </div>
+                            :
+                            <div className='px-4 py-3 w-[100%] mt-1 text-center font-bold' style={{ backgroundColor: "#cccccc", borderRadius: "12px", cursor: 'not-allowed' }}>
+                                <p className='text-black'>Already buy</p>
+                            </div>
                         :
                         <div className='mt-1 text-xl'>
                             <button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}

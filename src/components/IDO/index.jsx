@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useAccount } from 'wagmi'
+import { useContractRead, useAccount } from 'wagmi'
 import { Web3Button, useWeb3Modal } from '@web3modal/react';
 import Special from './Special';
 import HYPERSCALE from './HYPERSCALE';
 import MUSHCAPBIO from './MUSHCAPBIO';
+import { MCB, USDT, ICO } from "../../constant/address"
+import ERC20 from "../../constant/ERC20.json"
+import ICO_ABI from "../../constant/ICO.json"
 
 export default function IDO() {
 
