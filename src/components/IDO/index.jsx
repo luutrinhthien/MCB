@@ -203,7 +203,7 @@ export default function IDO() {
               </div>
             </div>
           </div>
-        </div> : <div>"Error!"</div>}
+        </div> : <div>"Waiting..."</div>}
     </div>
   )
 }
