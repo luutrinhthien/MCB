@@ -1,14 +1,14 @@
 import '@/styles/globals.css'
 import Head from 'next/head'
 import { WagmiConfig, createConfig, mainnet, configureChains } from 'wagmi'
-import { bscTestnet } from '@wagmi/core/chains'
+import { bscTestnet, bsc } from '@wagmi/core/chains'
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum';
 import { useWeb3ModalTheme, Web3Modal } from '@web3modal/react';
 import { useEffect } from 'react'
 
 const projectId = 'ef102092ea8faa1bd4d0209a1246a6b8';
 
-const chains = [bscTestnet];
+const chains = [bsc];
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })]);
 
 const config = createConfig({

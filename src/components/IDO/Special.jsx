@@ -122,7 +122,10 @@ function Special() {
         args: [Number(getPricePerSlot)],
     })
 
-    // console.log("success approve: ",  Number(AllowanceOfUSDT)/10**18, Number(getPricePerSlot))
+    const formatNumber = (num) => {
+        return (num).toLocaleString(undefined, { maximumFractionDigits: 0 });
+    }
+
     return (
         <div
             style={{ border: "1px solid rgb(171, 242, 13)", borderRadius: "12px" }}
@@ -171,7 +174,7 @@ function Special() {
                 <div class="flex-1">
                     <div className='text-[20px] text-right'>Remaining</div>
                     <div className='flex font-bold text-[24px] text-lime-400 justify-end'>
-                        <div className='font-black'>{(Number(balanceOfThis) / 10 ** 18).toString()}</div>
+                        <div className='font-black'>{formatNumber(Number(balanceOfThis) / 10 ** 18).toString()}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
                 </div>
@@ -192,7 +195,7 @@ function Special() {
                 <div className='w-[25%]'>
                     <div className='text-[20px] text-center'>Token per Slot</div>
                     <div className='flex font-bold text-[24px] text-lime-400 justify-start'>
-                        <div className='font-black'>{Number(tokenPerSlot)/10**18}</div>
+                        <div className='font-black'>{formatNumber(Number(tokenPerSlot)/10**18)}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
                 </div>
@@ -201,7 +204,7 @@ function Special() {
                 <div className='w-[25%]'>
                     <div className='text-[20px] text-center'>Price per Slot</div>
                     <div className='flex font-bold text-[24px] text-lime-400 justify-center'>
-                        <div className='font-black'>${Number(getPricePerSlot)/10**18}</div>
+                        <div className='font-black'>${formatNumber(Number(getPricePerSlot)/10**18)}</div>
                         <div className='mt-4'>USDT</div>
                     </div>
                 </div>

@@ -26,8 +26,8 @@ export default function Home() {
 
   useEffect(() => {
     if (chain) {
-      if (chain.id !== 97) {
-        switchNetwork?.(97);
+      if (chain.id !== 56) {
+        switchNetwork?.(56);
       }
     }
   }, [chain?.id, address, switchNetwork]);
