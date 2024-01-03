@@ -6,7 +6,7 @@ function MUSHCAPBIO() {
     return (
         <div
             style={{ border: "1px solid rgb(171, 242, 13)", borderRadius: "12px" }}
-            className='w-[45%] p-4 mx-auto text-[18px]'
+            className='md:w-[45%] w-[100%] md:mt-0 mt-8 p-4 mx-auto text-[18px]'
         >
             <div className='flex m-4'>
                 <div className='w-[72px] flex items-center justify-center'>

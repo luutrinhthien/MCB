@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Menu.module.css'
 
 const Menu = ({ setShowMobileMenu }) => {
-    return <div className={`px-2 py-3 space-y-2 font-medium text-2xl text-slate-700 absolute right-0 left-0 top-0 bottom-[-100vh] ${styles.slideIn}`} style={{ backgroundColor: "black", zIndex: "100" }}>
+    return <div className={`px-2 py-3 space-y-2 font-medium text-slate-700 absolute right-0 left-0 top-0 bottom-[-100vh] ${styles.slideIn}`} style={{ backgroundColor: "black", zIndex: "100" }}>
         <div className='flex justify-end'>
             <svg
                 onClick={() => setShowMobileMenu(prev => !prev)}
@@ -26,8 +26,9 @@ const Menu = ({ setShowMobileMenu }) => {
             Home
         </a>
         <a
+            href='/staking'
             onClick={() => setShowMobileMenu(prev => !prev)}
-            className="block px-3 py-2 rounded-md text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700"
+            className="block px-3 py-2 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
         >
             Staking
         </a>
@@ -38,8 +39,8 @@ const Menu = ({ setShowMobileMenu }) => {
             Open Sea
         </a>
         <a
-            href='/IDO'
-            className="block px-3 py-2 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+            onClick={() => setShowMobileMenu(prev => !prev)}
+            className="block px-3 py-2 rounded-md text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700"
         >
             IDO
         </a>

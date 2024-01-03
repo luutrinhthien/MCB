@@ -126,7 +126,7 @@ function Special() {
     return (
         <div
             style={{ border: "1px solid rgb(171, 242, 13)", borderRadius: "12px" }}
-            className='w-[50%] p-4 mx-auto text-[18px]'
+            className='md:w-[50%] w-[95%] p-4 mx-auto text-[18px]'
         >
             <div className='flex m-4'>
                 <div className='w-[72px] flex items-center justify-center'>
@@ -163,7 +163,7 @@ function Special() {
                 </div>
                 <div class="flex-1 pl box-border">
                     <div className='text-[20px] text-right pr-8'>Sold</div>
-                    <div className='flex font-bold text-[24px] text-lime-400 justify-end'>
+                    <div className='flex font-bold text-[24px] text-lime-400 md:justify-end justify-center'>
                         <div className='font-black'>{Number(totalSold)}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
@@ -195,6 +195,8 @@ function Special() {
                         <div className='font-black'>{Number(tokenPerSlot)/10**18}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
+                </div>
+                <div className='w-[25%] md:hidden block'>
                 </div>
                 <div className='w-[25%]'>
                     <div className='text-[20px] text-center'>Price per Slot</div>

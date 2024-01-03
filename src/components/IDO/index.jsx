@@ -7,6 +7,7 @@ import MUSHCAPBIO from './MUSHCAPBIO';
 import { MCB, USDT, ICO } from "../../constant/address"
 import ERC20 from "../../constant/ERC20.json"
 import ICO_ABI from "../../constant/ICO.json"
+import Menu from './Menu';
 
 export default function IDO() {
 
@@ -16,6 +17,8 @@ export default function IDO() {
 
   const [isClient, setIsClient] = useState(false)
 
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
   useEffect(() => {
     setIsClient(true)
   }, [])
@@ -24,38 +27,68 @@ export default function IDO() {
     <div>
       {isClient ?
         <div>
-          <div className='mt-4 ml-14 flex justify-between mr-14 text-2xl'>
+          <div className='mt-4 ml-14 flex justify-between md:mr-14 mr-2 text-2xl'>
             <div style={{ width: "3rem" }}>
               <img src="/img/logo.png" alt="" />
             </div>
-            <div className='flex space-x-4'>
+            <div className='md:flex hidden space-x-4'>
               <a className={`cursor-pointer `} href='/' >Home</a>
               <div className={`cursor-pointer `} >OpenSea</div>
               <a className={`cursor-pointer`} href='/staking'>Staking</a>
               <div className={`cursor-pointer font-bold`} href='/IDO'>IDO</div>
             </div>
 
-            {address ? <div className='mt-0 mb-5'><Web3Button avatar='hide' /></div>
+            {address ? <div className='mt-0 mb-5 flex'>
+              <Web3Button avatar='hide' />
+            <svg
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="h-6 w-6 ml-4 md:hidden block"
+              stroke="currentColor"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+              </div>
               :
-              <div className='mt-5 text-xl'>
+              <div className='md:mt-5 mt-0 text-xl flex'>
                 <button className='px-4 py-1' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
                   onClick={() => open()}>
                   <p className='text-black'>Connect Wallet</p>
                 </button>
+            <svg
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="h-6 w-6 ml-4 md:hidden block"
+              stroke="currentColor"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
               </div>}
-
-
+              {showMobileMenu && <Menu setShowMobileMenu={setShowMobileMenu} />}
           </div>
           <div className='mt-12 mx-auto'>
             {/* <img src="/img/logo.png" className='mx-auto' width={"240px"} alt="" />
             <div className='text-center mt-6 text-[24px]'>We architect momentum for the leading Blockchain companies</div> */}
-            <img src="/img/MCBcard.png" width={"full"} alt="" />
+            <img className='md:block hidden' src="/img/MCBcard.png" width={"full"} alt="" />
+            <img className='md:hidden block' src="/img/Gitbook.png" width={"full"} alt="" />
             <div className="w-[full] relative bg-lime-400 bg-opacity-10 text-center py-5">
               <div className="w-[full]">
                 <div className="text-center text-lime-400 text-[40px] font-bold font-['Darker Grotesque']">Your Gateway to DePIN Token Offerings</div>
               </div>
               <div className="w-[full]">
-                <div className="w-[600px] mx-auto">
+                <div className="md:w-[600px] w-[full] mx-auto">
                   <div className=" text-center text-white text-[20px] font-normal font-['Darker Grotesque']">Discover, Participate, and Invest in Cutting-Edge </div>
                   <div className=" text-center text-white text-[20px] font-normal font-['Darker Grotesque']">Projects with MCB's Platform. Join the Future of </div>
                   <div className=" text-center text-white text-[20px] font-normal font-['Darker Grotesque']">Decentralized Finance Today!</div>
@@ -65,15 +98,23 @@ export default function IDO() {
             <div className="my-3 mb-8 text-center text-lime-400 text-[48px] font-bold">Special</div>
             <Special />
             <div className="mt-8 mb-4 text-center text-lime-400 text-[36px] font-bold">Upcoming Projects</div>
-            <div className='flex w-[80%] mx-auto'>
+            <div className='md:flex block w-[80%] mx-auto'>
               <HYPERSCALE />
               <MUSHCAPBIO />
             </div>
-            <div className='w-[100%] mt-[307px]'>
-              <img src="/img/Upcoming/footerIDO.png" className='ml-auto' alt="footer" />
+            <div className='w-[100%] md:mt-[307px] mt-[100px]'>
+              <img src="/img/Upcoming/footerIDO.png" className='ml-auto md:block hidden' alt="footer" />
+              <div className='md:hidden block w-[90%] mx-auto'>
+                <div className='text-[#ABF20D] text-[36px] font-bold mb-6'>Launch a project on MCB now!</div>
+                <div className='text-[20px] mb-4'>MCB transcends the traditional role of a token launchpad. While we excel in token sales and marketing, our commitment goes far beyond that. MCB actively engages in real operations and project development work, ensuring that the projects we support not only raise funds successfully but also thrive in their operational endeavors.</div>
+                <button className='px-4 py-1 mb-6' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                  onClick={() => open()}>
+                  <p className='text-black'>Apply to Launch</p>
+                </button>
+              </div>
             </div>
-            <div className='h-[307px] mb-[64px] grid grid-cols-4 gap-2 px-2' style={{ backgroundColor: "rgba(20, 29, 2, 1)" }}>
-              <div className='col-span-1 mx-auto text-center mt-[64px]'>
+            <div className='md:h-[307px] h-[1228px] mb-[64px] grid grid-cols-4 gap-2 px-2' style={{ backgroundColor: "rgba(20, 29, 2, 1)" }}>
+              <div className='md:col-span-1 col-span-4 mx-auto text-center mt-[64px]'>
                 <svg className='mx-auto' width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_1138_357)">
                     <g clip-path="url(#clip1_1138_357)">
@@ -94,7 +135,7 @@ export default function IDO() {
                 <div className='text-[20px] font-[700] mt-1.5' style={{ color: "rgba(171, 242, 13, 1)" }}>Exposure</div>
                 <div className='text-[16px] font-[400] mt-9'>Get exposure to the millions of MCB users around the world</div>
               </div>
-              <div className='col-span-1 mx-auto text-center mt-[64px]'>
+              <div className='md:col-span-1 col-span-4 mx-auto text-center mt-[64px]'>
                 <svg className='mx-auto' width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_1138_365)">
                     <g clip-path="url(#clip1_1138_365)">
@@ -115,7 +156,7 @@ export default function IDO() {
                 <div className='text-[20px] font-[700] mt-1.5' style={{ color: "rgba(171, 242, 13, 1)" }}>Liquidity</div>
                 <div className='text-[16px] font-[400] mt-9 leading-[24px]'>Projects that are launched on Launchpad will be listed and have world-class liquidity in multiple trading pairs.</div>
               </div>
-              <div className='col-span-1 mx-auto text-center mt-[64px]'>
+              <div className='md:col-span-1 col-span-4 mx-auto text-center mt-[64px]'>
                 <svg className='mx-auto' width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_1138_374)">
                     <g clip-path="url(#clip1_1138_374)">
@@ -135,7 +176,7 @@ export default function IDO() {
                 <div className='text-[20px] font-[700] mt-1.5' style={{ color: "rgba(171, 242, 13, 1)" }}>Token Distribution</div>
                 <div className='text-[16px] font-[400] mt-9 leading-[24px]'>Your token will immediately be distributed to a large user base that hold your token.</div>
               </div>
-              <div className='col-span-1 mx-auto text-center mt-[64px]'>
+              <div className='md:col-span-1 col-span-4 mx-auto text-center mt-[64px]'>
                 <svg className='mx-auto' width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_1138_382)">
                     <g clip-path="url(#clip1_1138_382)">
