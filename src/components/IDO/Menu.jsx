@@ -25,7 +25,7 @@ const Menu = ({ setShowMobileMenu }) => {
         >
             Home
         </a>
-        <a
+        {/* <a
             href='/staking'
             onClick={() => setShowMobileMenu(prev => !prev)}
             className="block px-3 py-2 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
@@ -37,7 +37,7 @@ const Menu = ({ setShowMobileMenu }) => {
             className="block px-3 py-2 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
         >
             Open Sea
-        </a>
+        </a> */}
         <a
             onClick={() => setShowMobileMenu(prev => !prev)}
             className="block px-3 py-2 rounded-md text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700"

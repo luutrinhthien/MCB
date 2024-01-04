@@ -11,8 +11,19 @@ import {
 } from 'wagmi'
 
 function Special() {
+
     const { address } = useAccount()
     const { open, close } = useWeb3Modal()
+    const [input, setInput] = React.useState('')
+
+    const handleInputChange = (e) => {
+        const inputValue = e.target.value;
+
+        // Check if the input is a valid number but a float number
+        if (/^[0-9]*$/.test(inputValue)) {
+            setInput(inputValue);
+        }
+    }
 
     const { data: balanceOfMCB } = useContractRead({
         address: MCB,
@@ -60,42 +71,12 @@ function Special() {
         watch: true,
     })
 
-    const { data: slotUsed } = useContractRead({
-        address: ICO,
-        abi: ICO_ABI,
-        functionName: 'slotUsed',
-        args: [address],
-        watch: true,
-    })
-
-    const { data: whitelist } = useContractRead({
-        address: ICO,
-        abi: ICO_ABI,
-        functionName: 'whitelist',
-        args: [address],
-        watch: true,
-    })
-
-    const { data: totalSlot } = useContractRead({
-        address: ICO,
-        abi: ICO_ABI,
-        functionName: 'totalSlot',
-        watch: true,
-    })
-
-    const { data: tokenPerSlot } = useContractRead({
-        address: ICO,
-        abi: ICO_ABI,
-        functionName: 'tokenPerSlot',
-        watch: true,
-    })
-
-    const { data: getPricePerSlot } = useContractRead({
-        address: ICO,
-        abi: ICO_ABI,
-        functionName: 'getPricePerSlot',
-        watch: true,
-    })
+    // const { data: getPricePerSlot } = useContractRead({
+    //     address: ICO,
+    //     abi: ICO_ABI,
+    //     functionName: 'getPricePerSlot',
+    //     watch: true,
+    // })
 
     const { data: totalSold } = useContractRead({
         address: ICO,
@@ -108,7 +89,7 @@ function Special() {
         address: USDT,
         abi: ERC20,
         functionName: 'approve',
-        args: [ICO, Number(getPricePerSlot)],
+        args: [ICO, BigInt((Number(input)/Number(rate) || 0)*10**25/10**7)],
     })
 
     const { isSuccess, isLoading: isWaitForApproval } = useWaitForTransaction({
@@ -119,12 +100,39 @@ function Special() {
         address: ICO,
         abi: ICO_ABI,
         functionName: 'buyToken',
-        args: [Number(getPricePerSlot)],
+        args: [BigInt((Number(input)/Number(rate) || 0)*10**25/10**7)],
     })
 
     const formatNumber = (num) => {
-        return (num).toLocaleString(undefined, { maximumFractionDigits: 0 });
+        return (num).toLocaleString(undefined, { maximumFractionDigits: 4 });
     }
+    const { isSuccess: buyDone } = useWaitForTransaction({
+            hash: buy?.hash,
+    });
+
+    React.useEffect(()=>{
+        if(buyDone){
+            setInput('')
+        }
+    },[buyDone])
+
+    const [progress, setProgress] = React.useState("1%")
+
+    const divStyle = {
+        width: progress,
+    };
+
+    React.useEffect(()=>{
+        if(totalSold){
+            const percent = (Number(totalSold)/(20000000*10**18))*100
+            // console.log("C: ",percent+"%")
+            if(percent < 1){
+                setProgress("1%")
+            }else{
+                setProgress(percent+"%")
+            }
+        }
+    },[totalSold])
 
     return (
         <div
@@ -154,20 +162,20 @@ function Special() {
                 </div>
             </div>
             <div>MCB Ventures DAO is transforming the supply production sector with its cutting-edge AgFinTech ecosystem. Leveraging blockchain and crypto-economic mechanisms, our DePINs framework of IoTs and Next-Gen RFIDs allow individuals from around the globe to earn together when creating, managing, and overseeing physical infrastructure networks.</div>
-            <div className='text-[20px] font-bold my-2'>Current round: PRE-SEED $250,000 USDT</div>
+            <div className='text-[20px] font-bold my-2'>Current round: SEED $50,000 USDT</div>
             <div className='flex ml-4'>
                 <Active />
                 <div className='ml-2 font-bold text-lime-400 text-[20px]'>Open</div>
             </div>
             <div class="flex space-x-4">
-                <div class="flex-1">
+                <div class="">
                     <div className='text-[20px]'>Swap rate (estimate)</div>
                     <div className='font-bold text-[24px] text-lime-400'><span className='font-black'>{1 / Number(rate)}</span> USDT per MCB</div>
                 </div>
                 <div class="flex-1 pl box-border">
                     <div className='text-[20px] text-right pr-8'>Sold</div>
                     <div className='flex font-bold text-[24px] text-lime-400 md:justify-end justify-center'>
-                        <div className='font-black'>{Number(totalSold)}</div>
+                        <div className='font-black'>{formatNumber(Number(totalSold)/10**18)}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
                 </div>
@@ -181,13 +189,15 @@ function Special() {
             </div>
             <div className='text-[16px] my-4'>
                 <div>Progress</div>
-                <div className='h-[8px] bg-lime-400 rounded-[4px] my-[0.5rem]'></div>
+                {totalSold && <div className={`h-[8px] bg-lime-400 rounded-[4px] my-[0.5rem] `} 
+                style={divStyle}
+                ></div>}
                 <div className='flex justify-between'>
-                    <div>0.00 %</div>
-                    <div className='flex'>0.00 <span className='mt-[0.75rem] mx-1'>/</span> 100,000,000 MCB</div>
+                    <div>{Math.floor(Number(totalSold)/(20000000*10**18)*1000000)/1000000*100}%</div>
+                    <div className='flex'>{formatNumber(Number(totalSold)/10**18)} <span className='mt-[0.75rem] mx-1'>/</span> 20,000,000 MCB</div>
                 </div>
             </div>
-            <div className='flex'>
+            {/* <div className='flex'>
                 <div className='w-[25%]'>
                     <div>Total slot</div>
                     <div className='font-bold text-[24px] text-lime-400'>{Number(totalSlot)}</div>
@@ -208,7 +218,7 @@ function Special() {
                         <div className='mt-4'>USDT</div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div>
                 <div className='flex justify-center my-1'>
                     <div className='text-[24px] font-bold'>Your Account</div>
@@ -216,45 +226,51 @@ function Special() {
                         <path d="M4.55957 6L8.55957 10L12.5596 6" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </div>
-                <div className='border rounded-[16px] p-3 text-[20px] w-[60%] mx-auto my-3'>
+                <div className='border rounded-[16px] p-3 text-[20px] md:w-[60%] w-[90%] mx-auto my-3'>
                     <div className='font-bold flex'>
                         <div>Balance: </div>
                         <div className='text-[16px] mt-1 ml-1'>
-                            <div> {Number(balanceOfUSDT) / (10 ** 18) || "???"} USDT</div>
-                            <div> {Number(balanceOfMCB) / (10 ** 18) || "???"} MCB</div>
+                            <div> {formatNumber(Number(balanceOfUSDT) / (10 ** 18)) || "???"} USDT</div>
+                            <div> {formatNumber(Number(balanceOfMCB) / (10 ** 18)) || "???"} MCB</div>
                         </div>
                     </div>
                     <div className='text-center text-lime-400 font-bold'>
-                        {isAllowToTrade ? 'Sale now open.' : 'Sale have not open'}
+                        {isAllowToTrade ? 'Sale now open.' : 'Sale is not open.'}
                     </div>
                     {address ?
-                        !slotUsed ?
-                            <div className='mt-1 text-center font-bold'>
-                                {whitelist ?
-                                    (isAllowToTrade ?
-                                        Number(AllowanceOfUSDT) !== Number(getPricePerSlot) ?
-                                            <button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
-                                                onClick={approveUSDT}>
-                                                <p className='text-black'>Approve</p>
-                                            </button> :
-                                            (<button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
-                                                onClick={buyUSDT}>
-                                                <p className='text-black'>Buy</p>
-                                            </button>)
-                                        :
-                                        <div className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#cccccc", borderRadius: "12px", cursor: "not-allowed" }}>
-                                            <p className='text-black'>Wait to open trading</p>
-                                        </div>)
-                                    :
-                                    (<div className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#cccccc", borderRadius: "12px", cursor: "not-allowed" }}>
-                                        <p className='text-black'>You are not in white list</p>
-                                    </div>)
-                                }
-                            </div>
-                            :
-                            <div className='px-4 py-3 w-[100%] mt-1 text-center font-bold' style={{ backgroundColor: "#cccccc", borderRadius: "12px", cursor: 'not-allowed' }}>
-                                <p className='text-black'>Already buy</p>
-                            </div>
+                        <div className='mt-1 text-center font-bold'>
+                        <div className='flex p-1 px-2 mb-2 relative' style={{ borderColor: "#ABF20D", borderRadius: "12px", border: "2px solid #ABF20D", width: "100%", height: "3rem" }}>
+                            <input value={input} onChange={handleInputChange}
+                                type="text"
+                                placeholder='Enter MCB amount to buy'
+                                className=' bg-black rounded-xl p-1 px-4 focus:border-transparent focus:outline-none font-bold w-[85%]'
+                            />
+                            <div className='mt-0.5 mr-4 text-lime-400 font-bold absolute right-0'>MCB</div>
+                        </div>
+                        {rate && input && <div className='mb-2 text-right'>With {formatNumber(Number(input)/Number(rate))} USDT</div>}
+                        {!rate || !input && <div className='mb-2 text-right'>With ??? USDT</div>}
+                            {isAllowToTrade ?
+                                (input && input != 0 ? Number(AllowanceOfUSDT) < Number((Number(input)/Number(rate))*10**18) ?
+                                    <div>
+                                        <button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                                            onClick={approveUSDT}>
+                                            <p className='text-black'>Approve</p>
+                                        </button> </div> :
+                                    (<button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                                        onClick={buyUSDT}>
+                                        <p className='text-black'>Buy</p>
+                                    </button>)
+                                    : 
+                                    <button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
+                                            onClick={approveUSDT}>
+                                            <p className='text-black'>Approve</p>
+                                    </button>
+                                    )
+                                :
+                                <div className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#cccccc", borderRadius: "12px", cursor: "not-allowed" }}>
+                                    <p className='text-black'>Wait to open trading</p>
+                                </div>}
+                        </div>
                         :
                         <div className='mt-1 text-xl'>
                             <button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}

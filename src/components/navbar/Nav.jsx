@@ -9,8 +9,9 @@ export default function Nav({ nav, setNav }) {
             </div>
             <div className='flex space-x-5'>
                 <div className={`cursor-pointer ${nav === "home" ? "font-bold" : ""}`} onClick={() => setNav("home")}>Home</div>
-                <div className={`cursor-pointer ${nav === "openSea" ? "font-bold" : ""}`} onClick={() => setNav("openSea")}>OpenSea</div>
-                <div className={`cursor-pointer ${nav === "staking" ? "font-bold" : ""}`} onClick={() => setNav("staking")}>Staking</div>
+                {/* <div className={`cursor-pointer ${nav === "openSea" ? "font-bold" : ""}`} onClick={() => setNav("openSea")}>OpenSea</div>
+                <div className={`cursor-pointer ${nav === "staking" ? "font-bold" : ""}`} onClick={() => setNav("staking")}>Staking</div> */}
+                <a className={`cursor-pointer ${nav === "IDO" ? "font-bold" : ""}`} href='/IDO'>IDO</a>
             </div>
             {/* {nav === "staking" &&
                 <div>

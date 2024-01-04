@@ -5,6 +5,7 @@ import LandingPage from '@/components/desktop/landingPage/Landing'
 import Nav from '@/components/navbar/Nav'
 import Staking from '@/components/desktop/stakingLandingPage/Staking'
 import Modal from '@/components/landingModal/Modal'
+import IDO from '@/components/IDO'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +26,8 @@ export default function Home() {
       </div>
       <div className='md:block hidden'>
         <Nav nav={nav} setNav={setNav} />
-        {nav === "home" ? <LandingPage openModal={openModal} /> : (nav === "openSea" ? <LandingPage /> : <Staking />)}
+        {/* {nav === "home" ? <LandingPage openModal={openModal} /> : (nav === "openSea" ? <LandingPage /> : <Staking />)} */}
+        {nav === "home" ? <LandingPage openModal={openModal} /> : <IDO />}
       </div>
 
       <div className="flex items-center justify-center ">
