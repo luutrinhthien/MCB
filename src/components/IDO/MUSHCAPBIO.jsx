@@ -23,10 +23,10 @@ function MUSHCAPBIO() {
                     </div>
                 </div>
             </div>
-            <div className='text-[18px] leading-[24px] font-medium h-[160px] mt-8'>
+            <div className='text-[18px] leading-[24px] font-medium md:h-[160px] h-[auto] mt-8'>
                 Mushroom cultivation in the field of biotechnology holds immense financial viability beyond just consumption. The diverse applications of mushrooms in medicine, biofuel production, biodegradable textiles, alternative construction materials, and eco-friendly packaging solutions contribute to a thriving market with promising economic prospects.
             </div>
-            <div class="flex space-x-4">
+            <div class="md:flex hidden space-x-4">
                 <div class="flex-1">
                     <div className='text-[16px]'>Swap rate</div>
                     <div className='font-bold text-[20px] text-lime-400'>TBA</div>
@@ -41,6 +41,25 @@ function MUSHCAPBIO() {
                 <div class="flex-1">
                     <div className='text-[16px] text-right'>Access</div>
                     <div className='flex font-bold text-[20px] text-lime-400 justify-end'>
+                        <div className='font-bold'>Exclusive</div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:hidden block md:space-x-4 space-x-0">
+                <div class="">
+                    <div className='text-[16px]'>Swap rate</div>
+                    <div className='font-bold text-[20px] text-lime-400'>TBA</div>
+                </div>
+                <div class="box-border">
+                    <div className='text-[16px] pr-8'>Cap</div>
+                    <div className='flex font-bold text-[20px] text-lime-400'>
+                        <div className='font-bold'>100,000</div>
+                        <div className=''>USDT</div>
+                    </div>
+                </div>
+                <div class="">
+                    <div className='text-[16px]'>Access</div>
+                    <div className='flex font-bold text-[20px] text-lime-400'>
                         <div className='font-bold'>Exclusive</div>
                     </div>
                 </div>

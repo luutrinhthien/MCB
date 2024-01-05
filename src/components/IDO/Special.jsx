@@ -89,7 +89,7 @@ function Special() {
         address: USDT,
         abi: ERC20,
         functionName: 'approve',
-        args: [ICO, BigInt((Number(input)/Number(rate) || 0)*10**25/10**7)],
+        args: [ICO, BigInt((Number(input) / Number(rate) || 0) * 10 ** 25 / 10 ** 7)],
     })
 
     const { isSuccess, isLoading: isWaitForApproval } = useWaitForTransaction({
@@ -100,21 +100,21 @@ function Special() {
         address: ICO,
         abi: ICO_ABI,
         functionName: 'buyToken',
-        args: [BigInt((Number(input)/Number(rate) || 0)*10**25/10**7)],
+        args: [BigInt((Number(input) / Number(rate) || 0) * 10 ** 25 / 10 ** 7)],
     })
 
     const formatNumber = (num) => {
         return (num).toLocaleString(undefined, { maximumFractionDigits: 4 });
     }
     const { isSuccess: buyDone } = useWaitForTransaction({
-            hash: buy?.hash,
+        hash: buy?.hash,
     });
 
-    React.useEffect(()=>{
-        if(buyDone){
+    React.useEffect(() => {
+        if (buyDone) {
             setInput('')
         }
-    },[buyDone])
+    }, [buyDone])
 
     const [progress, setProgress] = React.useState("1%")
 
@@ -122,17 +122,17 @@ function Special() {
         width: progress,
     };
 
-    React.useEffect(()=>{
-        if(totalSold){
-            const percent = (Number(totalSold)/(20000000*10**18))*100
+    React.useEffect(() => {
+        if (totalSold) {
+            const percent = (Number(totalSold) / (20000000 * 10 ** 18)) * 100
             // console.log("C: ",percent+"%")
-            if(percent < 1){
+            if (percent < 1) {
                 setProgress("1%")
-            }else{
-                setProgress(percent+"%")
+            } else {
+                setProgress(percent + "%")
             }
         }
-    },[totalSold])
+    }, [totalSold])
 
     return (
         <div
@@ -161,40 +161,51 @@ function Special() {
                     </div>
                 </div>
             </div>
-            <div>MCB Ventures DAO is transforming the supply production sector with its cutting-edge AgFinTech ecosystem. Leveraging blockchain and crypto-economic mechanisms, our DePINs framework of IoTs and Next-Gen RFIDs allow individuals from around the globe to earn together when creating, managing, and overseeing physical infrastructure networks.</div>
+            <div>MCB Ventures DAO is at the forefront of transforming G2G projects using RWA and DePIN models. We facilitates a decentralized, robust, and smooth operation, eliminating the necessity for central trust or permissions in serving multi-trillion-dollar real-world economies.</div>
             <div className='text-[20px] font-bold my-2'>Current round: SEED $50,000 USDT</div>
             <div className='flex ml-4'>
                 <Active />
                 <div className='ml-2 font-bold text-lime-400 text-[20px]'>Open</div>
             </div>
             <div class="flex space-x-4">
-                <div class="">
+                <div class="md:block block">
                     <div className='text-[20px]'>Swap rate (estimate)</div>
                     <div className='font-bold text-[24px] text-lime-400'><span className='font-black'>{1 / Number(rate)}</span> USDT per MCB</div>
                 </div>
-                <div class="flex-1 pl box-border">
+                <div class="md:flex-1 block pl box-border">
                     <div className='text-[20px] text-right pr-8'>Sold</div>
                     <div className='flex font-bold text-[24px] text-lime-400 md:justify-end justify-center'>
-                        <div className='font-black'>{formatNumber(Number(totalSold)/10**18)}</div>
+                        <div className='font-black'>{formatNumber(Number(totalSold) / 10 ** 18)}</div>
                         <div className='mt-4'>MCB</div>
                     </div>
                 </div>
-                <div class="flex-1">
-                    <div className='text-[20px] text-right'>Remaining</div>
-                    <div className='flex font-bold text-[24px] text-lime-400 justify-end'>
-                        <div className='font-black'>{formatNumber(Number(balanceOfThis) / 10 ** 18).toString()}</div>
-                        <div className='mt-4'>MCB</div>
+                <div className='md:block hidden'>
+                    <div class="md:flex-1 block">
+                        <div className='text-[20px] text-right'>Remaining</div>
+                        <div className='flex font-bold text-[24px] text-lime-400 justify-end'>
+                            <div className='font-black'>{formatNumber(Number(balanceOfThis) / 10 ** 18).toString()}</div>
+                            <div className='mt-4'>MCB</div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div className='md:hidden flex justify-normal'>
+                    <div class="md:flex-1 block text-left">
+                        <div className='text-[20px] text-left'>Remaining</div>
+                        <div className='flex font-bold text-[24px] text-lime-400 justify-end'>
+                            <div className='font-black text-left'>{formatNumber(Number(balanceOfThis) / 10 ** 18).toString()}</div>
+                            <div className='mt-4 text-left'>MCB</div>
+                        </div>
+                    </div>
+                </div>
             <div className='text-[16px] my-4'>
                 <div>Progress</div>
-                {totalSold && <div className={`h-[8px] bg-lime-400 rounded-[4px] my-[0.5rem] `} 
-                style={divStyle}
+                {totalSold && <div className={`h-[8px] bg-lime-400 rounded-[4px] my-[0.5rem] `}
+                    style={divStyle}
                 ></div>}
                 <div className='flex justify-between'>
-                    <div>{Math.floor(Number(totalSold)/(20000000*10**18)*1000000)/1000000*100}%</div>
-                    <div className='flex'>{formatNumber(Number(totalSold)/10**18)} <span className='mt-[0.75rem] mx-1'>/</span> 20,000,000 MCB</div>
+                    <div>{Math.floor(Number(totalSold) / (20000000 * 10 ** 18) * 1000000) / 1000000 * 100}%</div>
+                    <div className='flex'>{formatNumber(Number(totalSold) / 10 ** 18)} <span className='mt-[0.75rem] mx-1'>/</span> 20,000,000 MCB</div>
                 </div>
             </div>
             {/* <div className='flex'>
@@ -239,18 +250,18 @@ function Special() {
                     </div>
                     {address ?
                         <div className='mt-1 text-center font-bold'>
-                        <div className='flex p-1 px-2 mb-2 relative' style={{ borderColor: "#ABF20D", borderRadius: "12px", border: "2px solid #ABF20D", width: "100%", height: "3rem" }}>
-                            <input value={input} onChange={handleInputChange}
-                                type="text"
-                                placeholder='Enter MCB amount to buy'
-                                className=' bg-black rounded-xl p-1 px-4 focus:border-transparent focus:outline-none font-bold w-[85%]'
-                            />
-                            <div className='mt-0.5 mr-4 text-lime-400 font-bold absolute right-0'>MCB</div>
-                        </div>
-                        {rate && input && <div className='mb-2 text-right'>With {formatNumber(Number(input)/Number(rate))} USDT</div>}
-                        {!rate || !input && <div className='mb-2 text-right'>With ??? USDT</div>}
+                            <div className='flex p-1 px-2 mb-2 relative' style={{ borderColor: "#ABF20D", borderRadius: "12px", border: "2px solid #ABF20D", width: "100%", height: "3rem" }}>
+                                <input value={input} onChange={handleInputChange}
+                                    type="text"
+                                    placeholder='Enter MCB amount...'
+                                    className=' bg-black rounded-xl p-1 px-4 focus:border-transparent focus:outline-none font-bold w-[85%]'
+                                />
+                                <div className='mt-0.5 mr-4 text-lime-400 font-bold absolute right-0'>MCB</div>
+                            </div>
+                            {rate && input && <div className='mb-2 text-right'>With {formatNumber(Number(input) / Number(rate))} USDT</div>}
+                            {!rate || !input && <div className='mb-2 text-right'>With ??? USDT</div>}
                             {isAllowToTrade ?
-                                (input && input != 0 ? Number(AllowanceOfUSDT) < Number((Number(input)/Number(rate))*10**18) ?
+                                (input && input != 0 ? Number(AllowanceOfUSDT) < Number((Number(input) / Number(rate)) * 10 ** 18) ?
                                     <div>
                                         <button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
                                             onClick={approveUSDT}>
@@ -260,12 +271,12 @@ function Special() {
                                         onClick={buyUSDT}>
                                         <p className='text-black'>Buy</p>
                                     </button>)
-                                    : 
+                                    :
                                     <button className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#ABF20D", borderRadius: "12px" }}
-                                            onClick={approveUSDT}>
-                                            <p className='text-black'>Approve</p>
+                                        onClick={approveUSDT}>
+                                        <p className='text-black'>Approve</p>
                                     </button>
-                                    )
+                                )
                                 :
                                 <div className='px-4 py-3 w-[100%]' style={{ backgroundColor: "#cccccc", borderRadius: "12px", cursor: "not-allowed" }}>
                                     <p className='text-black'>Wait to open trading</p>

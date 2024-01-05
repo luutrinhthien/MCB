@@ -23,10 +23,10 @@ function HYPERSCALE() {
                     </div>
                 </div>
             </div>
-            <div className='text-[18px] leading-[24px] font-medium h-[160px] mt-8'>
+            <div className='text-[18px] leading-[24px] font-medium md:h-[160px] h-[auto] mt-8'>
                 HyperScale aims to become the market leader in next generation data center solutions by providing unmatched performance, scalability, energy efficiency, and versatility through its state-of-the-art infrastructure and strategic partnerships.
             </div>
-            <div class="flex space-x-4">
+            <div class="md:flex hidden space-x-4">
                 <div class="flex-1">
                     <div className='text-[16px]'>Swap rate</div>
                     <div className='font-bold text-[20px] text-lime-400'>TBA</div>
@@ -41,6 +41,25 @@ function HYPERSCALE() {
                 <div class="flex-1">
                     <div className='text-[16px] text-right'>Access</div>
                     <div className='flex font-bold text-[20px] text-lime-400 justify-end'>
+                        <div className='font-bold'>Exclusive</div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:hidden block md:space-x-4 space-x-0">
+                <div class="">
+                    <div className='text-[16px]'>Swap rate</div>
+                    <div className='font-bold text-[20px] text-lime-400'>TBA</div>
+                </div>
+                <div class="box-border">
+                    <div className='text-[16px] pr-8'>Cap</div>
+                    <div className='flex font-bold text-[20px] text-lime-400'>
+                        <div className='font-bold'>500,000</div>
+                        <div className=''>USDT</div>
+                    </div>
+                </div>
+                <div class="">
+                    <div className='text-[16px]'>Access</div>
+                    <div className='flex font-bold text-[20px] text-lime-400'>
                         <div className='font-bold'>Exclusive</div>
                     </div>
                 </div>

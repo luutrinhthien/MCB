@@ -89,8 +89,8 @@ export default function IDO() {
               </div>
               <div className="w-[full]">
                 <div className="md:w-[600px] w-[full] mx-auto">
-                  <div className=" text-center text-white text-[20px] font-normal font-['Darker Grotesque']">Discover, Participate, and Invest in Cutting-Edge </div>
-                  <div className=" text-center text-white text-[20px] font-normal font-['Darker Grotesque']">Projects with MCB's Platform. Join the Future of </div>
+                  <div className=" text-center text-white text-[20px] font-normal font-['Darker Grotesque']">Discover, Participate, and Invest in Mega Projects</div>
+                  <div className=" text-center text-white text-[20px] font-normal font-['Darker Grotesque']">with MCB's Platform. Join the Future of</div>
                   <div className=" text-center text-white text-[20px] font-normal font-['Darker Grotesque']">Decentralized Finance Today!</div>
                 </div>
               </div>
