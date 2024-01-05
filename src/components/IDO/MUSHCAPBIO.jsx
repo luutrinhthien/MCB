@@ -10,7 +10,7 @@ function MUSHCAPBIO() {
         >
             <div className='flex m-4'>
                 <div className='w-[72px] flex items-center justify-center'>
-                    <img className='items-center' style={{ margin: "0 auto" }} src="img/upcoming/right.png" alt="" />
+                    <img className='items-center' style={{ margin: "0 auto" }} src="img/Upcoming/right1.png" alt="" />
                 </div>
                 <div className="text-lime-400 text-[20px] space-y-2 ml-8">
                     <div className='flex font-bold'>
