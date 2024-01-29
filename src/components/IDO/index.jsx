@@ -85,7 +85,8 @@ export default function IDO() {
             <img className='md:hidden block' src="/img/Gitbook.png" width={"full"} alt="" />
             <div className="w-[full] relative bg-lime-400 bg-opacity-10 text-center py-5">
               <div className="w-[full]">
-                <div className="text-center text-lime-400 text-[40px] font-bold font-['Darker Grotesque']">Your Gateway to DePIN Token Offerings</div>
+                {/* <div className="text-center text-lime-400 text-[40px] font-bold font-['Darker Grotesque']">Your Gateway to DePIN Token Offerings</div> */}
+                <div className="text-center text-lime-400 text-[40px] font-bold font-['Darker Grotesque']">Exclusive access to the RWA and DePIN of Sustainability</div>
               </div>
               <div className="w-[full]">
                 <div className="md:w-[600px] w-[full] mx-auto">

@@ -162,7 +162,8 @@ function Special() {
                 </div>
             </div>
             <div>MCB Ventures DAO is at the forefront of transforming G2G projects using RWA and DePIN models. We facilitates a decentralized, robust, and smooth operation, eliminating the necessity for central trust or permissions in serving multi-trillion-dollar real-world economies.</div>
-            <div className='text-[20px] font-bold my-2'>Current round: SEED $50,000 USDT</div>
+            {/* <div className='text-[20px] font-bold my-2'>Current round: SEED $50,000 USDT</div> */}
+            <div className='text-[20px] font-bold my-2'>Current round: PRIVATE $100,000 USDT</div>
             <div className='flex ml-4'>
                 <Active />
                 <div className='ml-2 font-bold text-lime-400 text-[20px]'>Open</div>

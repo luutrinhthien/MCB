@@ -38,6 +38,7 @@ export default function App({ Component, pageProps }) {
     <WagmiConfig config={config}>
       <Head>
         <title>MCB</title>
+        <link rel="icon" href="/img/metaLogo.png" />
       </Head>
       <Component {...pageProps} />
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient}
