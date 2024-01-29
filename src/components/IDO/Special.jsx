@@ -205,7 +205,9 @@ function Special() {
                 ></div>}
                 <div className='flex justify-between'>
                     <div>{Math.floor(Number(totalSold) / (20000000 * 10 ** 18) * 1000000) / 1000000 * 100}%</div>
-                    <div className='flex'>{formatNumber(Number(totalSold) / 10 ** 18)} <span className='mt-[0.75rem] mx-1'>/</span> 20,000,000 MCB</div>
+                    {/* This one will be used later */}
+                    {/* <div className='flex'>{formatNumber(Number(totalSold) / 10 ** 18)} <span className='mt-[0.75rem] mx-1'>/</span> 20,000,000 MCB</div> */}
+                    <div className='flex'>{formatNumber(Number(totalSold) / 10 ** 18)} <span className='mt-[0.75rem] mx-1'>/</span> 25,000,000 MCB</div>
                 </div>
             </div>
             {/* <div className='flex'>
