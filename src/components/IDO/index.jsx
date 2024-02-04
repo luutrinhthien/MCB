@@ -35,7 +35,7 @@ export default function IDO() {
               {/* <a className={`cursor-pointer `} href='/' >Home</a> */}
               {/* <div className={`cursor-pointer `} >OpenSea</div>
               <a className={`cursor-pointer`} href='/staking'>Staking</a> */}
-              <div className={`cursor-pointer font-bold`} href='/IDO'>IDO</div>
+              {/* <div className={`cursor-pointer font-bold`} href='/IDO'>IDO</div> */}
             </div>
 
             {address ? <div className='mt-0 mb-5 flex'>
