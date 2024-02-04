@@ -21,19 +21,20 @@ export default function Home() {
 
   return (
     <>
-      <div className='md:hidden visible'>
+      {/* <div className='md:hidden visible'>
         <LandingPageMobile openModal={openModal} />
       </div>
       <div className='md:block hidden'>
-        <Nav nav={nav} setNav={setNav} />
+        <Nav nav={nav} setNav={setNav} /> */}
         {/* {nav === "home" ? <LandingPage openModal={openModal} /> : (nav === "openSea" ? <LandingPage /> : <Staking />)} */}
-        {nav === "home" ? <LandingPage openModal={openModal} /> : <IDO />}
+        {/* {nav === "home" ? <LandingPage openModal={openModal} /> : <IDO />}
       </div>
 
       <div className="flex items-center justify-center ">
         <Modal showModal={showModal} setShowModal={setShowModal}>
         </Modal>
-      </div>
+      </div> */}
+      <IDO />
 
     </>
   )

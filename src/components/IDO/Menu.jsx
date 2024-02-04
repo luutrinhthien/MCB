@@ -19,12 +19,12 @@ const Menu = ({ setShowMobileMenu }) => {
                 ></path>
             </svg>
         </div>
-        <a
+        {/* <a
             href='/'
             className="block px-3 py-2 rounded-md hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
         >
             Home
-        </a>
+        </a> */}
         {/* <a
             href='/staking'
             onClick={() => setShowMobileMenu(prev => !prev)}

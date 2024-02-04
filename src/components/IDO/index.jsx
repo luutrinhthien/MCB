@@ -32,7 +32,7 @@ export default function IDO() {
               <img src="/img/logo.png" alt="" />
             </div>
             <div className='md:flex hidden space-x-4'>
-              <a className={`cursor-pointer `} href='/' >Home</a>
+              {/* <a className={`cursor-pointer `} href='/' >Home</a> */}
               {/* <div className={`cursor-pointer `} >OpenSea</div>
               <a className={`cursor-pointer`} href='/staking'>Staking</a> */}
               <div className={`cursor-pointer font-bold`} href='/IDO'>IDO</div>
